@@ -19,7 +19,7 @@ public class AddEditContact extends Activity
    // EditTexts for contact information
    private EditText nameEditText;
    private EditText phoneEditText;
-   private EditText emailEditText;
+   private EditText producerEditText;
    private EditText streetEditText;
    private EditText cityEditText;
    
@@ -31,7 +31,7 @@ public class AddEditContact extends Activity
       setContentView(R.layout.add_contact); // inflate the UI
 
       nameEditText = (EditText) findViewById(R.id.nameEditText);
-      emailEditText = (EditText) findViewById(R.id.emailEditText);
+      producerEditText = (EditText) findViewById(R.id.producerEditText);
       phoneEditText = (EditText) findViewById(R.id.phoneEditText);
       streetEditText = (EditText) findViewById(R.id.streetEditText);
       cityEditText = (EditText) findViewById(R.id.cityEditText);
@@ -43,7 +43,7 @@ public class AddEditContact extends Activity
       {
          rowID = extras.getLong("row_id");
          nameEditText.setText(extras.getString("name"));  
-         emailEditText.setText(extras.getString("email"));  
+         producerEditText.setText(extras.getString("producer"));
          phoneEditText.setText(extras.getString("phone"));  
          streetEditText.setText(extras.getString("street"));  
          cityEditText.setText(extras.getString("city"));  
@@ -109,7 +109,7 @@ public class AddEditContact extends Activity
          // insert the contact information into the database
          databaseConnector.insertContact(
             nameEditText.getText().toString(),
-            emailEditText.getText().toString(), 
+            producerEditText.getText().toString(),
             phoneEditText.getText().toString(), 
             streetEditText.getText().toString(),
             cityEditText.getText().toString());
@@ -118,7 +118,7 @@ public class AddEditContact extends Activity
       {
          databaseConnector.updateContact(rowID,
             nameEditText.getText().toString(),
-            emailEditText.getText().toString(), 
+            producerEditText.getText().toString(),
             phoneEditText.getText().toString(), 
             streetEditText.getText().toString(),
             cityEditText.getText().toString());

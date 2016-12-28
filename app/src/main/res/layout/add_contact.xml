@@ -16,11 +16,11 @@
          android:layout_height="wrap_content" 
          android:imeOptions="actionNext" android:hint="@string/hint_phone" 
          android:inputType="phone"></EditText>
-      <EditText android:id="@+id/emailEditText"
+      <EditText android:id="@+id/producerEditText"
          android:layout_width="match_parent" 
          android:layout_height="wrap_content" 
-         android:imeOptions="actionNext" android:hint="@string/hint_email"
-         android:inputType="textEmailAddress"></EditText>
+         android:imeOptions="actionNext" android:hint="@string/hint_producer"
+         android:inputType="text"></EditText>
       <TextView android:id="@+id/addressTextView" 
          android:color="@android:color/black" android:textSize="18sp"
          android:paddingTop="10dp" android:layout_width="wrap_content"

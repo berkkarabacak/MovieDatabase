@@ -75,19 +75,19 @@ public class AddressBook extends AppCompatActivity  implements ObservableScrollV
 
       // map each contact's name to a TextView in the ListView layout
       // Add these codes after ListView initialization
-      ArrayList<String> items = new ArrayList<String>();
-      for (int i = 1; i <= 100; i++) {
-         items.add("Item " + i);
-      }
-      listView.setAdapter(new ArrayAdapter<String>(
-              this, android.R.layout.simple_list_item_1, items));
+//      ArrayList<String> items = new ArrayList<String>();
+//      for (int i = 1; i <= 100; i++) {
+//         items.add("Item " + i);
+//      }
+//      listView.setAdapter(new ArrayAdapter<String>(
+//              this, android.R.layout.simple_list_item_1, items));
 
-/*      String[] from = new String[] { "name" };
+      String[] from = new String[] { "name" };
       int[] to = new int[] { android.R.id.text1 };
       contactAdapter = new SimpleCursorAdapter(
          AddressBook.this, android.R.layout.simple_list_item_1, null, from, to);
       listView.setAdapter(contactAdapter);
-      listView.setOnItemClickListener(viewContactListener);*/
+      listView.setOnItemClickListener(viewContactListener);
       listView.setBackgroundColor(Color.BLUE);
 
 
@@ -101,8 +101,8 @@ public class AddressBook extends AppCompatActivity  implements ObservableScrollV
    {
       super.onResume(); // call super's onResume method
       
-       // create new GetContactsTask and execute it 
-     //  new GetContactsTask().execute((Object[]) null);  Burayi uncomment yap
+       // create new GetmoviesTask and execute it
+       new GetmoviesTask().execute((Object[]) null);
     } // end method onResume
 
    @Override
@@ -118,7 +118,7 @@ public class AddressBook extends AppCompatActivity  implements ObservableScrollV
    } // end method onStop
 
    // performs database query outside GUI thread
-   private class GetContactsTask extends AsyncTask<Object, Object, Cursor> 
+   private class GetmoviesTask extends AsyncTask<Object, Object, Cursor>
    {
       DatabaseConnector databaseConnector = 
          new DatabaseConnector(AddressBook.this);
@@ -129,8 +129,8 @@ public class AddressBook extends AppCompatActivity  implements ObservableScrollV
       {
          databaseConnector.open();
 
-         // get a cursor containing call contacts
-         return databaseConnector.getAllContacts(); 
+         // get a cursor containing call movies
+         return databaseConnector.getAllmovies();
       } // end method doInBackground
 
       // use the Cursor returned from the doInBackground method
@@ -140,7 +140,7 @@ public class AddressBook extends AppCompatActivity  implements ObservableScrollV
          contactAdapter.changeCursor(result); // set the adapter's Cursor
          databaseConnector.close();
       } // end method onPostExecute
-   } // end class GetContactsTask
+   } // end class GetmoviesTask
       
    // create the Activity's menu from a menu resource XML file
    @Override

@@ -19,7 +19,7 @@ public class ViewContact extends Activity
    private long rowID; // selected contact's name
    private TextView nameTextView; // displays contact's name 
    private TextView phoneTextView; // displays contact's phone
-   private TextView emailTextView; // displays contact's email
+   private TextView producerTextView; // displays contact's producer
    private TextView streetTextView; // displays contact's street
    private TextView cityTextView; // displays contact's city/state/zip
 
@@ -33,7 +33,7 @@ public class ViewContact extends Activity
       // get the EditTexts
       nameTextView = (TextView) findViewById(R.id.nameTextView);
       phoneTextView = (TextView) findViewById(R.id.phoneTextView);
-      emailTextView = (TextView) findViewById(R.id.emailTextView);
+      producerTextView = (TextView) findViewById(R.id.producerTextView);
       streetTextView = (TextView) findViewById(R.id.streetTextView);
       cityTextView = (TextView) findViewById(R.id.cityTextView);
       
@@ -79,14 +79,14 @@ public class ViewContact extends Activity
          // get the column index for each data item
          int nameIndex = result.getColumnIndex("name");
          int phoneIndex = result.getColumnIndex("phone");
-         int emailIndex = result.getColumnIndex("email");
+         int producerIndex = result.getColumnIndex("producer");
          int streetIndex = result.getColumnIndex("street");
          int cityIndex = result.getColumnIndex("city");
    
          // fill TextViews with the retrieved data
          nameTextView.setText(result.getString(nameIndex));
          phoneTextView.setText(result.getString(phoneIndex));
-         emailTextView.setText(result.getString(emailIndex));
+         producerTextView.setText(result.getString(producerIndex));
          streetTextView.setText(result.getString(streetIndex));
          cityTextView.setText(result.getString(cityIndex));
    
@@ -120,7 +120,7 @@ public class ViewContact extends Activity
             addEditContact.putExtra(AddressBook.ROW_ID, rowID);
             addEditContact.putExtra("name", nameTextView.getText());
             addEditContact.putExtra("phone", phoneTextView.getText());
-            addEditContact.putExtra("email", emailTextView.getText());
+            addEditContact.putExtra("producer", producerTextView.getText());
             addEditContact.putExtra("street", streetTextView.getText());
             addEditContact.putExtra("city", cityTextView.getText());
             startActivity(addEditContact); // start the Activity

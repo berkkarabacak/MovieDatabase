@@ -8,12 +8,12 @@
    <string name="menuitem_delete_contact">Delete Contact</string>
    <string name="address">Address</string>
    <string name="hint_name">Name</string>
-   <string name="hint_email">E-Mail</string>
+   <string name="hint_producer">Producer</string>
    <string name="hint_phone">Phone</string>
    <string name="hint_street">Street</string>
    <string name="hint_city">City/State/Zip</string>
    <string name="label_name">Name:</string>
-   <string name="label_email">E-Mail:</string>
+   <string name="label_producer">Producer:</string>
    <string name="label_phone">Phone:</string>
    <string name="label_street">Street:</string>
    <string name="label_city">City/State/Zip:</string>

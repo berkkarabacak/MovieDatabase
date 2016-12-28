@@ -1,5 +1,5 @@
 // DatabaseConnector.java
-// Provides easy connection and creation of UserContacts database.
+// Provides easy connection and creation of Usermovies database.
 package com.deitel.addressbook;
 
 import android.content.ContentValues;
@@ -13,7 +13,7 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 public class DatabaseConnector 
 {
    // database name
-   private static final String DATABASE_NAME = "UserContacts";
+   private static final String DATABASE_NAME = "Movies";
    private SQLiteDatabase database; // database object
    private DatabaseOpenHelper databaseOpenHelper; // database helper
 
@@ -40,57 +40,57 @@ public class DatabaseConnector
    } // end method close
 
    // inserts a new contact in the database
-   public void insertContact(String name, String email, String phone, 
+   public void insertContact(String name, String producer, String phone,
       String state, String city) 
    {
       ContentValues newContact = new ContentValues();
       newContact.put("name", name);
-      newContact.put("email", email);
+      newContact.put("producer", producer);
       newContact.put("phone", phone);
       newContact.put("street", state);
       newContact.put("city", city);
 
       open(); // open the database
-      database.insert("contacts", null, newContact);
+      database.insert("movies", null, newContact);
       close(); // close the database
    } // end method insertContact
 
    // inserts a new contact in the database
-   public void updateContact(long id, String name, String email, 
+   public void updateContact(long id, String name, String producer,
       String phone, String state, String city) 
    {
       ContentValues editContact = new ContentValues();
       editContact.put("name", name);
-      editContact.put("email", email);
+      editContact.put("producer", producer);
       editContact.put("phone", phone);
       editContact.put("street", state);
       editContact.put("city", city);
 
       open(); // open the database
-      database.update("contacts", editContact, "_id=" + id, null);
+      database.update("movies", editContact, "_id=" + id, null);
       close(); // close the database
    } // end method updateContact
 
    // return a Cursor with all contact information in the database
-   public Cursor getAllContacts() 
+   public Cursor getAllmovies()
    {
-      return database.query("contacts", new String[] {"_id", "name"}, 
+      return database.query("movies", new String[] {"_id", "name"},
          null, null, null, null, "name");
-   } // end method getAllContacts
+   } // end method getAllmovies
 
    // get a Cursor containing all information about the contact specified
    // by the given id
    public Cursor getOneContact(long id) 
    {
       return database.query(
-         "contacts", null, "_id=" + id, null, null, null, null);
+         "movies", null, "_id=" + id, null, null, null, null);
    } // end method getOnContact
 
    // delete the contact specified by the given String name
    public void deleteContact(long id) 
    {
       open(); // open the database
-      database.delete("contacts", "_id=" + id, null);
+      database.delete("movies", "_id=" + id, null);
       close(); // close the database
    } // end method deleteContact
    
@@ -103,14 +103,14 @@ public class DatabaseConnector
          super(context, name, factory, version);
       } // end DatabaseOpenHelper constructor
 
-      // creates the contacts table when the database is created
+      // creates the movies table when the database is created
       @Override
       public void onCreate(SQLiteDatabase db) 
       {
-         // query to create a new table named contacts
-         String createQuery = "CREATE TABLE contacts" +
+         // query to create a new table named movies
+         String createQuery = "CREATE TABLE movies" +
             "(_id integer primary key autoincrement," +
-            "name TEXT, email TEXT, phone TEXT," +
+            "name TEXT, producer TEXT, phone TEXT," +
             "street TEXT, city TEXT);";
                   
          db.execSQL(createQuery); // execute the query
