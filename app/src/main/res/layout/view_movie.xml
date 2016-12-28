@@ -9,50 +9,50 @@
          android:layout_width="match_parent" 
          android:layout_height="wrap_content">
          <TextView android:id="@+id/nameLabelTextView" 
-            style="@style/ContactLabelTextView"
+            style="@style/movieLabelTextView"
             android:text="@string/label_name"></TextView>
          <TextView android:id="@+id/nameTextView" 
-            style="@style/ContactTextView"></TextView>
+            style="@style/movieTextView"></TextView>
       </TableRow>
 
       <TableRow android:id="@+id/phoneTableRow"
          android:layout_width="match_parent"
          android:layout_height="wrap_content">
          <TextView android:id="@+id/phoneLabelTextView" 
-            style="@style/ContactLabelTextView"
+            style="@style/movieLabelTextView"
             android:text="@string/label_phone"></TextView>
          <TextView android:id="@+id/phoneTextView"
-            style="@style/ContactTextView"></TextView>
+            style="@style/movieTextView"></TextView>
       </TableRow>
 
       <TableRow android:id="@+id/producerTableRow"
          android:layout_width="match_parent"
          android:layout_height="wrap_content">
          <TextView android:id="@+id/producerLabelTextView"
-            style="@style/ContactLabelTextView"
+            style="@style/movieLabelTextView"
             android:text="@string/label_producer"></TextView>
          <TextView android:id="@+id/producerTextView"
-            style="@style/ContactTextView"></TextView>
+            style="@style/movieTextView"></TextView>
       </TableRow>
 
       <TableRow android:id="@+id/streetTableRow"
          android:layout_width="match_parent"
          android:layout_height="wrap_content">
          <TextView android:id="@+id/streetLabelTextView" 
-            style="@style/ContactLabelTextView"
+            style="@style/movieLabelTextView"
             android:text="@string/label_street"></TextView>
          <TextView android:id="@+id/streetTextView"
-            style="@style/ContactTextView"></TextView>
+            style="@style/movieTextView"></TextView>
       </TableRow>
 
       <TableRow android:id="@+id/cityTableRow"
          android:layout_width="match_parent"
          android:layout_height="wrap_content">
          <TextView android:id="@+id/cityLabelTextView" 
-            style="@style/ContactLabelTextView"
+            style="@style/movieLabelTextView"
             android:text="@string/label_city"></TextView>
          <TextView android:id="@+id/cityTextView"
-            style="@style/ContactTextView"></TextView>
+            style="@style/movieTextView"></TextView>
       </TableRow>
    </TableLayout>
 </ScrollView >

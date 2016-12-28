@@ -37,11 +37,11 @@
          android:layout_height="wrap_content" 
          android:imeOptions="actionDone" android:hint="@string/hint_city"
          android:inputType="textPostalAddress|textCapWords"></EditText>
-      <Button android:id="@+id/saveContactButton" 
+      <Button android:id="@+id/savemovieButton"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_marginTop="15dp"
          android:layout_gravity="center_horizontal"
-         android:text="@string/button_save_contact"></Button>
+         android:text="@string/button_save_movie"></Button>
    </LinearLayout>
 </ScrollView>

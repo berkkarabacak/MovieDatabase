@@ -1,4 +1,4 @@
-// AddEditContact.java
+// AddEditmovie.java
 // Activity for adding a new entry to or  
 // editing an existing entry in the address book.
 package com.deitel.addressbook;
@@ -12,11 +12,11 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class AddEditContact extends Activity 
+public class AddEditmovie extends Activity
 {
-   private long rowID; // id of contact being edited, if any
+   private long rowID; // id of movie being edited, if any
    
-   // EditTexts for contact information
+   // EditTexts for movie information
    private EditText nameEditText;
    private EditText phoneEditText;
    private EditText producerEditText;
@@ -28,7 +28,7 @@ public class AddEditContact extends Activity
    public void onCreate(Bundle savedInstanceState) 
    {
       super.onCreate(savedInstanceState); // call super's onCreate
-      setContentView(R.layout.add_contact); // inflate the UI
+      setContentView(R.layout.add_movie); // inflate the UI
 
       nameEditText = (EditText) findViewById(R.id.nameEditText);
       producerEditText = (EditText) findViewById(R.id.producerEditText);
@@ -49,27 +49,27 @@ public class AddEditContact extends Activity
          cityEditText.setText(extras.getString("city"));  
       } // end if
       
-      // set event listener for the Save Contact Button
-      Button saveContactButton = 
-         (Button) findViewById(R.id.saveContactButton);
-      saveContactButton.setOnClickListener(saveContactButtonClicked);
+      // set event listener for the Save movie Button
+      Button savemovieButton =
+         (Button) findViewById(R.id.savemovieButton);
+      savemovieButton.setOnClickListener(savemovieButtonClicked);
    } // end method onCreate
 
    // responds to event generated when user clicks the Done Button
-   OnClickListener saveContactButtonClicked = new OnClickListener() 
+   OnClickListener savemovieButtonClicked = new OnClickListener()
    {
       @Override
       public void onClick(View v) 
       {
          if (nameEditText.getText().length() != 0)
          {
-            AsyncTask<Object, Object, Object> saveContactTask = 
+            AsyncTask<Object, Object, Object> savemovieTask =
                new AsyncTask<Object, Object, Object>() 
                {
                   @Override
                   protected Object doInBackground(Object... params) 
                   {
-                     saveContact(); // save contact to the database
+                     savemovie(); // save movie to the database
                      return null;
                   } // end method doInBackground
       
@@ -80,14 +80,14 @@ public class AddEditContact extends Activity
                   } // end method onPostExecute
                }; // end AsyncTask
                
-            // save the contact to the database using a separate thread
-            saveContactTask.execute((Object[]) null); 
+            // save the movie to the database using a separate thread
+            savemovieTask.execute((Object[]) null);
          } // end if
          else
          {
             // create a new AlertDialog Builder
             AlertDialog.Builder builder = 
-               new AlertDialog.Builder(AddEditContact.this);
+               new AlertDialog.Builder(AddEditmovie.this);
       
             // set dialog title & message, and provide Button to dismiss
             builder.setTitle(R.string.errorTitle); 
@@ -96,18 +96,18 @@ public class AddEditContact extends Activity
             builder.show(); // display the Dialog
          } // end else
       } // end method onClick
-   }; // end OnClickListener saveContactButtonClicked
+   }; // end OnClickListener savemovieButtonClicked
 
-   // saves contact information to the database
-   private void saveContact() 
+   // saves movie information to the database
+   private void savemovie()
    {
       // get DatabaseConnector to interact with the SQLite database
       DatabaseConnector databaseConnector = new DatabaseConnector(this);
 
       if (getIntent().getExtras() == null)
       {
-         // insert the contact information into the database
-         databaseConnector.insertContact(
+         // insert the movie information into the database
+         databaseConnector.insertmovie(
             nameEditText.getText().toString(),
             producerEditText.getText().toString(),
             phoneEditText.getText().toString(), 
@@ -116,15 +116,15 @@ public class AddEditContact extends Activity
       } // end if
       else
       {
-         databaseConnector.updateContact(rowID,
+         databaseConnector.updatemovie(rowID,
             nameEditText.getText().toString(),
             producerEditText.getText().toString(),
             phoneEditText.getText().toString(), 
             streetEditText.getText().toString(),
             cityEditText.getText().toString());
       } // end else
-   } // end class saveContact
-} // end class AddEditContact
+   } // end class savemovie
+} // end class AddEditmovie
 
 
 /**************************************************************************

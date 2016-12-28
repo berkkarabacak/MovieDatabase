@@ -13,9 +13,9 @@
             <category android:name="android.intent.category.LAUNCHER" />
          </intent-filter>
       </activity>
-      <activity android:name=".AddEditContact" 
+      <activity android:name=".AddEditmovie"
          android:label="@string/app_name"></activity>
-      <activity android:name=".ViewContact" 
+      <activity android:name=".Viewmovie"
          android:label="@string/app_name"></activity>
    </application>
    <uses-sdk android:minSdkVersion="8" />

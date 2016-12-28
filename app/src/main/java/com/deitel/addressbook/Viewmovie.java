@@ -1,5 +1,5 @@
-// ViewContact.java
-// Activity for viewing a single contact.
+// Viewmovie.java
+// Activity for viewing a single movie.
 package com.deitel.addressbook;
 
 import android.app.Activity;
@@ -14,21 +14,21 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class ViewContact extends Activity 
+public class Viewmovie extends Activity
 {
-   private long rowID; // selected contact's name
-   private TextView nameTextView; // displays contact's name 
-   private TextView phoneTextView; // displays contact's phone
-   private TextView producerTextView; // displays contact's producer
-   private TextView streetTextView; // displays contact's street
-   private TextView cityTextView; // displays contact's city/state/zip
+   private long rowID; // selected movie's name
+   private TextView nameTextView; // displays movie's name
+   private TextView phoneTextView; // displays movie's phone
+   private TextView producerTextView; // displays movie's producer
+   private TextView streetTextView; // displays movie's street
+   private TextView cityTextView; // displays movie's city/state/zip
 
    // called when the activity is first created
    @Override
    public void onCreate(Bundle savedInstanceState) 
    {
       super.onCreate(savedInstanceState);
-      setContentView(R.layout.view_contact);
+      setContentView(R.layout.view_movie);
 
       // get the EditTexts
       nameTextView = (TextView) findViewById(R.id.nameTextView);
@@ -37,7 +37,7 @@ public class ViewContact extends Activity
       streetTextView = (TextView) findViewById(R.id.streetTextView);
       cityTextView = (TextView) findViewById(R.id.cityTextView);
       
-      // get the selected contact's row ID
+      // get the selected movie's row ID
       Bundle extras = getIntent().getExtras();
       rowID = extras.getLong(AddressBook.ROW_ID); 
    } // end method onCreate
@@ -48,15 +48,15 @@ public class ViewContact extends Activity
    {
       super.onResume();
       
-      // create new LoadContactTask and execute it 
-      new LoadContactTask().execute(rowID);
+      // create new LoadmovieTask and execute it
+      new LoadmovieTask().execute(rowID);
    } // end method onResume
    
    // performs database query outside GUI thread
-   private class LoadContactTask extends AsyncTask<Long, Object, Cursor> 
+   private class LoadmovieTask extends AsyncTask<Long, Object, Cursor>
    {
       DatabaseConnector databaseConnector = 
-         new DatabaseConnector(ViewContact.this);
+         new DatabaseConnector(Viewmovie.this);
 
       // perform the database access
       @Override
@@ -65,7 +65,7 @@ public class ViewContact extends Activity
          databaseConnector.open();
          
          // get a cursor containing all data on given entry
-         return databaseConnector.getOneContact(params[0]);
+         return databaseConnector.getOnemovie(params[0]);
       } // end method doInBackground
 
       // use the Cursor returned from the doInBackground method
@@ -93,7 +93,7 @@ public class ViewContact extends Activity
          result.close(); // close the result cursor
          databaseConnector.close(); // close database connection
       } // end method onPostExecute
-   } // end class LoadContactTask
+   } // end class LoadmovieTask
       
    // create the Activity's menu from a menu resource XML file
    @Override
@@ -101,7 +101,7 @@ public class ViewContact extends Activity
    {
       super.onCreateOptionsMenu(menu);
       MenuInflater inflater = getMenuInflater();
-      inflater.inflate(R.menu.view_contact_menu, menu);
+      inflater.inflate(R.menu.view_movie_menu, menu);
       return true;
    } // end method onCreateOptionsMenu
    
@@ -112,33 +112,33 @@ public class ViewContact extends Activity
       switch (item.getItemId()) // switch based on selected MenuItem's ID
       {
          case R.id.editItem:
-            // create an Intent to launch the AddEditContact Activity
-            Intent addEditContact =
-               new Intent(this, AddEditContact.class);
+            // create an Intent to launch the AddEditmovie Activity
+            Intent addEditmovie =
+               new Intent(this, AddEditmovie.class);
             
-            // pass the selected contact's data as extras with the Intent
-            addEditContact.putExtra(AddressBook.ROW_ID, rowID);
-            addEditContact.putExtra("name", nameTextView.getText());
-            addEditContact.putExtra("phone", phoneTextView.getText());
-            addEditContact.putExtra("producer", producerTextView.getText());
-            addEditContact.putExtra("street", streetTextView.getText());
-            addEditContact.putExtra("city", cityTextView.getText());
-            startActivity(addEditContact); // start the Activity
+            // pass the selected movie's data as extras with the Intent
+            addEditmovie.putExtra(AddressBook.ROW_ID, rowID);
+            addEditmovie.putExtra("name", nameTextView.getText());
+            addEditmovie.putExtra("phone", phoneTextView.getText());
+            addEditmovie.putExtra("producer", producerTextView.getText());
+            addEditmovie.putExtra("street", streetTextView.getText());
+            addEditmovie.putExtra("city", cityTextView.getText());
+            startActivity(addEditmovie); // start the Activity
             return true;
          case R.id.deleteItem:
-            deleteContact(); // delete the displayed contact
+            deletemovie(); // delete the displayed movie
             return true;
          default:
             return super.onOptionsItemSelected(item);
       } // end switch
    } // end method onOptionsItemSelected
    
-   // delete a contact
-   private void deleteContact()
+   // delete a movie
+   private void deletemovie()
    {
       // create a new AlertDialog Builder
       AlertDialog.Builder builder = 
-         new AlertDialog.Builder(ViewContact.this);
+         new AlertDialog.Builder(Viewmovie.this);
 
       builder.setTitle(R.string.confirmTitle); // title bar string
       builder.setMessage(R.string.confirmMessage); // message to display
@@ -151,9 +151,9 @@ public class ViewContact extends Activity
             public void onClick(DialogInterface dialog, int button)
             {
                final DatabaseConnector databaseConnector = 
-                  new DatabaseConnector(ViewContact.this);
+                  new DatabaseConnector(Viewmovie.this);
 
-               // create an AsyncTask that deletes the contact in another 
+               // create an AsyncTask that deletes the movie in another
                // thread, then calls finish after the deletion
                AsyncTask<Long, Object, Object> deleteTask =
                   new AsyncTask<Long, Object, Object>()
@@ -161,7 +161,7 @@ public class ViewContact extends Activity
                      @Override
                      protected Object doInBackground(Long... params)
                      {
-                        databaseConnector.deleteContact(params[0]); 
+                        databaseConnector.deletemovie(params[0]);
                         return null;
                      } // end method doInBackground
 
@@ -172,7 +172,7 @@ public class ViewContact extends Activity
                      } // end method onPostExecute
                   }; // end new AsyncTask
 
-               // execute the AsyncTask to delete contact at rowID
+               // execute the AsyncTask to delete movie at rowID
                deleteTask.execute(new Long[] { rowID });               
             } // end method onClick
          } // end anonymous inner class
@@ -180,21 +180,5 @@ public class ViewContact extends Activity
       
       builder.setNegativeButton(R.string.button_cancel, null);
       builder.show(); // display the Dialog
-   } // end method deleteContact
-} // end class ViewContact
-
-
-/**************************************************************************
- * (C) Copyright 1992-2012 by Deitel & Associates, Inc. and               *
- * Pearson Education, Inc. All Rights Reserved.                           *
- *                                                                        *
- * DISCLAIMER: The authors and publisher of this book have used their     *
- * best efforts in preparing the book. These efforts include the          *
- * development, research, and testing of the theories and programs        *
- * to determine their effectiveness. The authors and publisher make       *
- * no warranty of any kind, expressed or implied, with regard to these    *
- * programs or to the documentation contained in these books. The authors *
- * and publisher shall not be liable in any event for incidental or       *
- * consequential damages in connection with, or arising out of, the       *
- * furnishing, performance, or use of these programs.                     *
- **************************************************************************/
+   } // end method deletemovie
+} // end class Viewmovie

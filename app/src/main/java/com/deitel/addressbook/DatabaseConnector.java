@@ -39,60 +39,60 @@ public class DatabaseConnector
          database.close(); // close the database connection
    } // end method close
 
-   // inserts a new contact in the database
-   public void insertContact(String name, String producer, String phone,
+   // inserts a new movie in the database
+   public void insertmovie(String name, String producer, String phone,
       String state, String city) 
    {
-      ContentValues newContact = new ContentValues();
-      newContact.put("name", name);
-      newContact.put("producer", producer);
-      newContact.put("phone", phone);
-      newContact.put("street", state);
-      newContact.put("city", city);
+      ContentValues newmovie = new ContentValues();
+      newmovie.put("name", name);
+      newmovie.put("producer", producer);
+      newmovie.put("phone", phone);
+      newmovie.put("street", state);
+      newmovie.put("city", city);
 
       open(); // open the database
-      database.insert("movies", null, newContact);
+      database.insert("movies", null, newmovie);
       close(); // close the database
-   } // end method insertContact
+   } // end method insertmovie
 
-   // inserts a new contact in the database
-   public void updateContact(long id, String name, String producer,
+   // inserts a new movie in the database
+   public void updatemovie(long id, String name, String producer,
       String phone, String state, String city) 
    {
-      ContentValues editContact = new ContentValues();
-      editContact.put("name", name);
-      editContact.put("producer", producer);
-      editContact.put("phone", phone);
-      editContact.put("street", state);
-      editContact.put("city", city);
+      ContentValues editmovie = new ContentValues();
+      editmovie.put("name", name);
+      editmovie.put("producer", producer);
+      editmovie.put("phone", phone);
+      editmovie.put("street", state);
+      editmovie.put("city", city);
 
       open(); // open the database
-      database.update("movies", editContact, "_id=" + id, null);
+      database.update("movies", editmovie, "_id=" + id, null);
       close(); // close the database
-   } // end method updateContact
+   } // end method updatemovie
 
-   // return a Cursor with all contact information in the database
+   // return a Cursor with all movie information in the database
    public Cursor getAllmovies()
    {
       return database.query("movies", new String[] {"_id", "name"},
          null, null, null, null, "name");
    } // end method getAllmovies
 
-   // get a Cursor containing all information about the contact specified
+   // get a Cursor containing all information about the movie specified
    // by the given id
-   public Cursor getOneContact(long id) 
+   public Cursor getOnemovie(long id)
    {
       return database.query(
          "movies", null, "_id=" + id, null, null, null, null);
-   } // end method getOnContact
+   } // end method getOnmovie
 
-   // delete the contact specified by the given String name
-   public void deleteContact(long id) 
+   // delete the movie specified by the given String name
+   public void deletemovie(long id)
    {
       open(); // open the database
       database.delete("movies", "_id=" + id, null);
       close(); // close the database
-   } // end method deleteContact
+   } // end method deletemovie
    
    private class DatabaseOpenHelper extends SQLiteOpenHelper 
    {

@@ -30,8 +30,8 @@ import java.util.ArrayList;
 public class AddressBook extends AppCompatActivity  implements ObservableScrollViewCallbacks
 {
    public static final String ROW_ID = "row_id"; // Intent extra key
-   private ListView contactListView; // the ListActivity's ListView
-   private CursorAdapter contactAdapter; // adapter for ListView
+   private ListView movieListView; // the ListActivity's ListView
+   private CursorAdapter movieAdapter; // adapter for ListView
 
 
    @Override
@@ -63,17 +63,17 @@ public class AddressBook extends AppCompatActivity  implements ObservableScrollV
    @Override
    public void onCreate(Bundle savedInstanceState) 
    {
-      setContentView(R.layout.contact_list_item);
+      setContentView(R.layout.movie_list_item);
 
       ObservableListView listView = (ObservableListView) findViewById(R.id.list);
       listView.setScrollViewCallbacks(AddressBook.this);
 
 
       super.onCreate(savedInstanceState); // call super's onCreate
-      //contactListView = getListView(); // get the built-in ListView
-//      contactListView.setOnItemClickListener(viewContactListener);
+      //movieListView = getListView(); // get the built-in ListView
+//      movieListView.setOnItemClickListener(viewmovieListener);
 
-      // map each contact's name to a TextView in the ListView layout
+      // map each movie's name to a TextView in the ListView layout
       // Add these codes after ListView initialization
 //      ArrayList<String> items = new ArrayList<String>();
 //      for (int i = 1; i <= 100; i++) {
@@ -84,16 +84,16 @@ public class AddressBook extends AppCompatActivity  implements ObservableScrollV
 
       String[] from = new String[] { "name" };
       int[] to = new int[] { android.R.id.text1 };
-      contactAdapter = new SimpleCursorAdapter(
+      movieAdapter = new SimpleCursorAdapter(
          AddressBook.this, android.R.layout.simple_list_item_1, null, from, to);
-      listView.setAdapter(contactAdapter);
-      listView.setOnItemClickListener(viewContactListener);
+      listView.setAdapter(movieAdapter);
+      listView.setOnItemClickListener(viewmovieListener);
       listView.setBackgroundColor(Color.BLUE);
 
 
 
 
-      //   setListAdapter(contactAdapter); // set contactView's adapter
+      //   setListAdapter(movieAdapter); // set movieView's adapter
    } // end method onCreate
 
    @Override
@@ -108,12 +108,12 @@ public class AddressBook extends AppCompatActivity  implements ObservableScrollV
    @Override
    protected void onStop() 
    {
-      Cursor cursor = contactAdapter.getCursor(); // get current Cursor
+      Cursor cursor = movieAdapter.getCursor(); // get current Cursor
       
       if (cursor != null) 
          cursor.deactivate(); // deactivate it
       
-      contactAdapter.changeCursor(null); // adapted now has no Cursor
+      movieAdapter.changeCursor(null); // adapted now has no Cursor
       super.onStop();
    } // end method onStop
 
@@ -137,7 +137,7 @@ public class AddressBook extends AppCompatActivity  implements ObservableScrollV
       @Override
       protected void onPostExecute(Cursor result)
       {
-         contactAdapter.changeCursor(result); // set the adapter's Cursor
+         movieAdapter.changeCursor(result); // set the adapter's Cursor
          databaseConnector.close();
       } // end method onPostExecute
    } // end class GetmoviesTask
@@ -156,30 +156,30 @@ public class AddressBook extends AppCompatActivity  implements ObservableScrollV
    @Override
    public boolean onOptionsItemSelected(MenuItem item) 
    {
-      // create a new Intent to launch the AddEditContact Activity
-      Intent addNewContact = 
-         new Intent(AddressBook.this, AddEditContact.class);
-      startActivity(addNewContact); // start the AddEditContact Activity
+      // create a new Intent to launch the AddEditmovie Activity
+      Intent addNewmovie =
+         new Intent(AddressBook.this, AddEditmovie.class);
+      startActivity(addNewmovie); // start the AddEditmovie Activity
       return super.onOptionsItemSelected(item); // call super's method
    } // end method onOptionsItemSelected
 
-   // event listener that responds to the user touching a contact's name
+   // event listener that responds to the user touching a movie's name
    // in the ListView
-   OnItemClickListener viewContactListener = new OnItemClickListener() 
+   OnItemClickListener viewmovieListener = new OnItemClickListener()
    {
       @Override
       public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
          long arg3) 
       {
-         // create an Intent to launch the ViewContact Activity
-         Intent viewContact = 
-            new Intent(AddressBook.this, ViewContact.class);
+         // create an Intent to launch the Viewmovie Activity
+         Intent viewmovie =
+            new Intent(AddressBook.this, Viewmovie.class);
          
-         // pass the selected contact's row ID as an extra with the Intent
-         viewContact.putExtra(ROW_ID, arg3);
-         startActivity(viewContact); // start the ViewContact Activity
+         // pass the selected movie's row ID as an extra with the Intent
+         viewmovie.putExtra(ROW_ID, arg3);
+         startActivity(viewmovie); // start the Viewmovie Activity
       } // end method onItemClick
-   }; // end viewContactListener
+   }; // end viewmovieListener
 } // end class AddressBook
 
 
